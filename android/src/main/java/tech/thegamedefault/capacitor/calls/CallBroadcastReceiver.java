@@ -1,0 +1,65 @@
+package tech.thegamedefault.capacitor.calls;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.telephony.TelephonyManager;
+
+public class CallBroadcastReceiver extends BroadcastReceiver {
+
+    CallDetector.CallStateChangeListener callStateChangeListener = null;
+    private final PhoneState currentPhoneState = new PhoneState();
+    private int prevState = TelephonyManager.CALL_STATE_IDLE;
+
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        callStateChangeListener.onCallStateChanged();
+        if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
+            currentPhoneState.setCallActive(true);
+            currentPhoneState.setCallState("OUTGOING_CALL");
+        } else {
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            checkPhoneState(tm.getCallState());
+        }
+    }
+
+    private void checkPhoneState(int state) {
+        switch (state) {
+            case TelephonyManager.CALL_STATE_IDLE:
+                this.currentPhoneState.setCallActive(false);
+                this.currentPhoneState.setCallState("CALL_STATE_IDLE");
+                break;
+
+            case TelephonyManager.CALL_STATE_RINGING:
+                // called when someone is ringing to this phone
+                this.currentPhoneState.setCallActive(true);
+                this.currentPhoneState.setCallState("RINGING");
+                break;
+
+            case TelephonyManager.CALL_STATE_OFFHOOK:
+
+                // If call was picked
+                if (prevState == TelephonyManager.CALL_STATE_RINGING) {
+                    this.currentPhoneState.setCallActive(true);
+                    this.currentPhoneState.setCallState("ON_CALL");
+                } else {
+                    // TODO: Not sure if this is correct.
+                    this.currentPhoneState.setCallActive(false);
+                    this.currentPhoneState.setCallState("ON_HOLD");
+                }
+
+                break;
+        }
+        this.prevState = state;
+    }
+
+    public void setCallStateChangeListener(CallDetector.CallStateChangeListener callStateChangeListener) {
+        this.callStateChangeListener = callStateChangeListener;
+    }
+
+    public PhoneState getCurrentPhoneState() {
+        return this.currentPhoneState;
+    }
+
+}
