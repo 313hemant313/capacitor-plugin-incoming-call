@@ -9,6 +9,38 @@ npm install capacitor-plugin-incoming-call
 npx cap sync
 ```
 
+## Usage
+
+Typescipt side changes:
+```bash
+console.log('### Test CallDetector plugin ###');
+CallDetector.detectCallState({ action: 'ACTIVATE' }).then(x => console.log(x)).catch(e => console.error(e));
+CallDetector.addListener('callStateChange', res => {
+  console.log('### Listening to callStateChange ###');
+  console.log(res);
+});
+```
+
+Android side changes:
+```bash
+public class MainActivity extends BridgeActivity {
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    String[] PERMISSIONS = {
+      android.Manifest.permission.READ_PHONE_STATE,
+      android.Manifest.permission.READ_CALL_LOG
+    };
+
+    ActivityCompat.requestPermissions(MainActivity.this,
+      PERMISSIONS,
+      0);
+  }
+
+}
+```
+
 ## API
 
 <docgen-index>
