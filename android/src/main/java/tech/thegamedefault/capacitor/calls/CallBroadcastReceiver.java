@@ -1,9 +1,14 @@
 package tech.thegamedefault.capacitor.calls;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
 
 public class CallBroadcastReceiver extends BroadcastReceiver {
 
@@ -14,12 +19,16 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.i("CallBroadcastReceiver", intent.getAction());
         callStateChangeListener.onCallStateChanged();
         if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
             currentPhoneState.setCallActive(true);
             currentPhoneState.setCallState("OUTGOING_CALL");
         } else {
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                return;
+            }
             checkPhoneState(tm.getCallState());
         }
     }

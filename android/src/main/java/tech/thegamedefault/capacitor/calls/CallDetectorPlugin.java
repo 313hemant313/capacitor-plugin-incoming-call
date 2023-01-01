@@ -1,6 +1,7 @@
 package tech.thegamedefault.capacitor.calls;
 
 import android.Manifest;
+import android.util.Log;
 
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
@@ -43,7 +44,7 @@ public class CallDetectorPlugin extends Plugin {
         JSObject ret = new JSObject();
         if ("ACTIVATE".equals(action)) {
             setupCallDetector();
-//            call.setKeepAlive(true);
+            call.setKeepAlive(true);
         } else {
             implementation.disableDetectCall();
         }
@@ -52,12 +53,13 @@ public class CallDetectorPlugin extends Plugin {
     }
 
     private void setupCallDetector() {
-        implementation.startDetection(getActivity());
         implementation.setCallStateChangeListener(this::updateCallState);
         implementation.enableDetectCall();
+        implementation.startDetection(getActivity());
     }
 
     private void updateCallState() {
+        Log.i("CallDetector", "Notify listeners, CurrentPhoneState: " + implementation.getCurrentPhoneState());
         notifyListeners(CALL_STATE_EVENT, getPhoneStateJSObject(implementation.getCurrentPhoneState()));
     }
 
