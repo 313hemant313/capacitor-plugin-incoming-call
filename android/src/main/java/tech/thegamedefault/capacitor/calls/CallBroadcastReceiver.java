@@ -37,7 +37,7 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
         switch (state) {
             case TelephonyManager.CALL_STATE_IDLE:
                 this.currentPhoneState.setCallActive(false);
-                this.currentPhoneState.setCallState("CALL_STATE_IDLE");
+                this.currentPhoneState.setCallState("IDLE");
                 break;
 
             case TelephonyManager.CALL_STATE_RINGING:
