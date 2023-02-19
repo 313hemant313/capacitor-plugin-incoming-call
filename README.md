@@ -3,26 +3,20 @@
 capacitor-plugin-incoming-call
 
 ## Install
-
+install the package and sync the project.
 ```bash
 npm install capacitor-plugin-incoming-call
 npx cap sync
 ```
 
-## Usage
+Add the required permissions to the Android source code
 
-Typescipt side changes:
-```bash
-console.log('### Test CallDetector plugin ###');
-CallDetector.detectCallState({ action: 'ACTIVATE' }).then(x => console.log(x)).catch(e => console.error(e));
-CallDetector.addListener('callStateChange', res => {
-  console.log('### Listening to callStateChange ###');
-  console.log(res);
-});
-```
+``android\app\src\main\java\app\[package_namespace]\MainActivity.java``
+```java
+import android.os.Bundle; // required for onCreate parameter
+import com.getcapacitor.BridgeActivity;
+import androidx.core.app.ActivityCompat;
 
-Android side changes:
-```bash
 public class MainActivity extends BridgeActivity {
 
   @Override
@@ -39,6 +33,18 @@ public class MainActivity extends BridgeActivity {
   }
 
 }
+```
+
+## Usage
+
+Typescipt side changes:
+```typescript
+console.log('### Test CallDetector plugin ###');
+CallDetector.detectCallState({ action: 'ACTIVATE' }).then(x => console.log(x)).catch(e => console.error(e));
+CallDetector.addListener('callStateChange', res => {
+  console.log('### Listening to callStateChange ###');
+  console.log(res);
+});
 ```
 
 ## API
