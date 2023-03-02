@@ -20,7 +20,6 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i("CallBroadcastReceiver", intent.getAction());
-        callStateChangeListener.onCallStateChanged();
         if (intent.getAction().equals(Intent.ACTION_NEW_OUTGOING_CALL)) {
             currentPhoneState.setCallActive(true);
             currentPhoneState.setCallState("OUTGOING_CALL");
@@ -29,8 +28,13 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
-            checkPhoneState(tm.getCallState());
+            int callState = tm.getCallState();
+            if(callState == this.prevState){
+                return;
+            }
+            checkPhoneState(callState);
         }
+        callStateChangeListener.onCallStateChanged();
     }
 
     private void checkPhoneState(int state) {
