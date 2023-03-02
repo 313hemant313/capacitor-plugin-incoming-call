@@ -29,6 +29,10 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
                 return;
             }
+            int callState = tm.getCallState();
+            if(callState == this.prevState){
+                return;
+            }
             checkPhoneState(tm.getCallState());
         }
     }
