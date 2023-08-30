@@ -29,7 +29,7 @@ public class PhoneState {
     public JSONObject toJsonObject() {
         JSONObject jsonObject= new JSONObject();
         try {
-            jsonObject.put("callActive", getCallState());
+            jsonObject.put("callActive", isCallActive());
             jsonObject.put("callState", getCallState());
         } catch (JSONException e) {
             e.printStackTrace();
