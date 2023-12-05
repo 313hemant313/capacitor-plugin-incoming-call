@@ -31,6 +31,11 @@ export interface PhoneState {
    * @since 1.0.0
    */
   callState: PhoneStateType;
+
+  incomingNumber: string;
+
+  outgoingNumber: string;
+
 }
 
 export type PhoneStateType = 'RINGING' | 'OUTGOING' | 'IDLE' | 'ON_CALL' | 'ON_HOLD';

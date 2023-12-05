@@ -29,15 +29,15 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
                 return;
             }
             int callState = tm.getCallState();
-            if(callState == this.prevState){
+            if (callState == this.prevState) {
                 return;
             }
-            checkPhoneState(callState);
+            checkPhoneState(callState, intent);
         }
         callStateChangeListener.onCallStateChanged();
     }
 
-    private void checkPhoneState(int state) {
+    private void checkPhoneState(int state, Intent intent) {
         switch (state) {
             case TelephonyManager.CALL_STATE_IDLE:
                 this.currentPhoneState.setCallActive(false);
@@ -48,6 +48,7 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
                 // called when someone is ringing to this phone
                 this.currentPhoneState.setCallActive(true);
                 this.currentPhoneState.setCallState("RINGING");
+                this.currentPhoneState.setIncomingNumber(intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER));
                 break;
 
             case TelephonyManager.CALL_STATE_OFFHOOK:
@@ -61,7 +62,7 @@ public class CallBroadcastReceiver extends BroadcastReceiver {
                     this.currentPhoneState.setCallActive(false);
                     this.currentPhoneState.setCallState("ON_HOLD");
                 }
-
+                this.currentPhoneState.setOutgoingNumber(intent.getStringExtra(Intent.EXTRA_PHONE_NUMBER));
                 break;
         }
         this.prevState = state;
