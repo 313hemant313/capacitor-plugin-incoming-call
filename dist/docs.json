@@ -1,0 +1,178 @@
+{
+  "api": {
+    "name": "CallDetectorPlugin",
+    "slug": "calldetectorplugin",
+    "docs": "",
+    "tags": [],
+    "methods": [
+      {
+        "name": "echo",
+        "signature": "(options: { value: string; }) => Promise<{ value: string; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ value: string; }"
+          }
+        ],
+        "returns": "Promise<{ value: string; }>",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [],
+        "slug": "echo"
+      },
+      {
+        "name": "detectCallState",
+        "signature": "(options: { action: string; }) => Promise<{ action: string; }>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "{ action: string; }"
+          }
+        ],
+        "returns": "Promise<{ action: string; }>",
+        "tags": [],
+        "docs": "To enable / disable detection of calls \r\noptions: { action: 'ACTIVATE' | 'DEACTIVATE' }",
+        "complexTypes": [],
+        "slug": "detectcallstate"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'callStateChange', listenerFunc: CallStateChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'callStateChange'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "CallStateChangeListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle> & PluginListenerHandle",
+        "tags": [],
+        "docs": "",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "CallStateChangeListener"
+        ],
+        "slug": "addlistenercallstatechange"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => Promise<void>"
+        }
+      ]
+    },
+    {
+      "name": "PhoneState",
+      "slug": "phonestate",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "callActive",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "Whether there is an active call or not.",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "callState",
+          "tags": [
+            {
+              "text": "1.0.0",
+              "name": "since"
+            }
+          ],
+          "docs": "The type of call.\r\n\r\n'RINGING' | 'OUTGOING' | 'IDLE' | 'ON_CALL' | 'ON_HOLD'",
+          "complexTypes": [
+            "PhoneStateType"
+          ],
+          "type": "PhoneStateType"
+        },
+        {
+          "name": "incomingNumber",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "outgoingNumber",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [
+    {
+      "name": "CallStateChangeListener",
+      "slug": "callstatechangelistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(status: PhoneState): void",
+          "complexTypes": [
+            "PhoneState"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PhoneStateType",
+      "slug": "phonestatetype",
+      "docs": "",
+      "types": [
+        {
+          "text": "'RINGING'",
+          "complexTypes": []
+        },
+        {
+          "text": "'OUTGOING'",
+          "complexTypes": []
+        },
+        {
+          "text": "'IDLE'",
+          "complexTypes": []
+        },
+        {
+          "text": "'ON_CALL'",
+          "complexTypes": []
+        },
+        {
+          "text": "'ON_HOLD'",
+          "complexTypes": []
+        }
+      ]
+    }
+  ],
+  "pluginConfigs": []
+}

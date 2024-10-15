@@ -123,10 +123,12 @@ addListener(eventName: 'callStateChange', listenerFunc: CallStateChangeListener)
 
 #### PhoneState
 
-| Prop             | Type                                                      | Description                                                                   | Since |
-| ---------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------- | ----- |
-| **`callActive`** | <code>boolean</code>                                      | Whether there is an active call or not.                                       | 1.0.0 |
-| **`callState`**  | <code><a href="#phonestatetype">PhoneStateType</a></code> | The type of call. 'RINGING' \| 'OUTGOING' \| 'IDLE' \| 'ON_CALL' \| 'ON_HOLD' | 1.0.0 |
+| Prop                 | Type                                                      | Description                                                                   | Since |
+| -------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------- | ----- |
+| **`callActive`**     | <code>boolean</code>                                      | Whether there is an active call or not.                                       | 1.0.0 |
+| **`callState`**      | <code><a href="#phonestatetype">PhoneStateType</a></code> | The type of call. 'RINGING' \| 'OUTGOING' \| 'IDLE' \| 'ON_CALL' \| 'ON_HOLD' | 1.0.0 |
+| **`incomingNumber`** | <code>string</code>                                       |                                                                               |       |
+| **`outgoingNumber`** | <code>string</code>                                       |                                                                               |       |
 
 
 ### Type Aliases
