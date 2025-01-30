@@ -73,4 +73,51 @@ public class CallDetectorPlugin: CAPPlugin, CXCallObserverDelegate {
             ]);
         }
   }
+    
+    @objc func getCurrentCallState(_ call: CAPPluginCall) {
+
+        if !enabled {
+            callObserver.setDelegate(self, queue: nil)
+            enabled = true
+        }
+
+
+        let currentCallState = getCallState()
+
+
+        call.resolve([
+            "callActive": currentCallState.callActive,
+            "callState": currentCallState.callState
+        ])
+    }
+
+    // Helper method to determine the current call state
+    private func getCallState() -> (callActive: Bool, callState: String) {
+        var callState = "IDLE"
+        var callActive = false
+
+
+        for call in callObserver.calls {
+            if call.hasConnected {
+                callState = "ON_CALL"
+                callActive = true
+            } else if call.isOutgoing {
+                callState = "OUTGOING"
+                callActive = false
+            } else if call.hasEnded {
+                callState = "IDLE"
+                callActive = false
+            } else if call.isOnHold {
+                callState = "ON_HOLD"
+                callActive = true
+            } else {
+                callState = "RINGING"
+                callActive = false
+            }
+
+            break
+        }
+
+        return (callActive, callState)
+    }
 }
