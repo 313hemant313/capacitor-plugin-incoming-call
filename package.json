@@ -17,10 +17,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/313hemant313/capacitor-plugin-incoming-call.git"
+    "url": "git+https://github.com/devhus/capacitor-plugin-incoming-call.git"
   },
   "bugs": {
-    "url": "https://github.com/313hemant313/capacitor-plugin-incoming-call/issues"
+    "url": "https://github.com/devhus/capacitor-plugin-incoming-call/issues"
   },
   "keywords": [
     "capacitor",
