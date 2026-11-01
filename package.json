@@ -17,10 +17,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devhus/capacitor-plugin-incoming-call.git"
+    "url": "git+https://github.com/313hemant313/capacitor-plugin-incoming-call.git"
   },
   "bugs": {
-    "url": "https://github.com/devhus/capacitor-plugin-incoming-call/issues"
+    "url": "https://github.com/313hemant313/capacitor-plugin-incoming-call/issues"
   },
   "keywords": [
     "capacitor",
@@ -41,6 +41,8 @@
     "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.js",
     "clean": "rimraf ./dist",
     "watch": "tsc --watch",
+    "prepare": "npm run build",
+    "prepack": "npm run build",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
