@@ -3,6 +3,22 @@
 capacitor-plugin-incoming-call
 
 ## Install
+
+Version 8 of this plugin requires Capacitor 8. The minimum supported platforms are Android API 24 and iOS 15.
+
+### iOS package manager
+
+This plugin currently supports CocoaPods only; Swift Package Manager (SPM) is not supported. Capacitor 8 creates new iOS projects with SPM by default. When adding iOS to a new project, select CocoaPods explicitly:
+
+```bash
+npm install @capacitor/ios@^8
+npx cap add ios --packagemanager CocoaPods
+```
+
+Existing CocoaPods projects can use the installation steps below. Existing SPM projects must switch to CocoaPods before using this plugin.
+
+### Package installation
+
 install the package and sync the project.
 ```bash
 npm install capacitor-plugin-incoming-call
@@ -98,7 +114,7 @@ options: { action: 'ACTIVATE' | 'DEACTIVATE' }
 ### addListener('callStateChange', ...)
 
 ```typescript
-addListener(eventName: 'callStateChange', listenerFunc: CallStateChangeListener) => Promise<PluginListenerHandle> & PluginListenerHandle
+addListener(eventName: 'callStateChange', listenerFunc: CallStateChangeListener) => Promise<PluginListenerHandle>
 ```
 
 | Param              | Type                                                                        |
@@ -106,7 +122,7 @@ addListener(eventName: 'callStateChange', listenerFunc: CallStateChangeListener)
 | **`eventName`**    | <code>'callStateChange'</code>                                              |
 | **`listenerFunc`** | <code><a href="#callstatechangelistener">CallStateChangeListener</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt; & <a href="#pluginlistenerhandle">PluginListenerHandle</a></code>
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
 
 --------------------
 
@@ -123,10 +139,12 @@ addListener(eventName: 'callStateChange', listenerFunc: CallStateChangeListener)
 
 #### PhoneState
 
-| Prop             | Type                                                      | Description                                                                   | Since |
-| ---------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------- | ----- |
-| **`callActive`** | <code>boolean</code>                                      | Whether there is an active call or not.                                       | 1.0.0 |
-| **`callState`**  | <code><a href="#phonestatetype">PhoneStateType</a></code> | The type of call. 'RINGING' \| 'OUTGOING' \| 'IDLE' \| 'ON_CALL' \| 'ON_HOLD' | 1.0.0 |
+| Prop                 | Type                                                      | Description                                                                   | Since |
+| -------------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------- | ----- |
+| **`callActive`**     | <code>boolean</code>                                      | Whether there is an active call or not.                                       | 1.0.0 |
+| **`callState`**      | <code><a href="#phonestatetype">PhoneStateType</a></code> | The type of call. 'RINGING' \| 'OUTGOING' \| 'IDLE' \| 'ON_CALL' \| 'ON_HOLD' | 1.0.0 |
+| **`incomingNumber`** | <code>string</code>                                       |                                                                               |       |
+| **`outgoingNumber`** | <code>string</code>                                       |                                                                               |       |
 
 
 ### Type Aliases

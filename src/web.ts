@@ -1,6 +1,9 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { CallDetectorPlugin } from './definitions';
+import type {
+  CallDetectorPlugin,
+  CallStateChangeListener,
+} from './definitions';
 
 export class CallDetectorWeb extends WebPlugin implements CallDetectorPlugin {
   async echo(options: { value: string }): Promise<{ value: string }> {
@@ -13,4 +16,10 @@ export class CallDetectorWeb extends WebPlugin implements CallDetectorPlugin {
     return options;
   }
 
+  async addListener(
+    eventName: 'callStateChange',
+    listenerFunc: CallStateChangeListener,
+  ): Promise<import('@capacitor/core').PluginListenerHandle> {
+    return super.addListener(eventName, listenerFunc);
+  }
 }
