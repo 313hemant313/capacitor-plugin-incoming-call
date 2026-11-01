@@ -3,6 +3,22 @@
 capacitor-plugin-incoming-call
 
 ## Install
+
+Version 8 of this plugin requires Capacitor 8. The minimum supported platforms are Android API 24 and iOS 15.
+
+### iOS package manager
+
+This plugin currently supports CocoaPods only; Swift Package Manager (SPM) is not supported. Capacitor 8 creates new iOS projects with SPM by default. When adding iOS to a new project, select CocoaPods explicitly:
+
+```bash
+npm install @capacitor/ios@^8
+npx cap add ios --packagemanager CocoaPods
+```
+
+Existing CocoaPods projects can use the installation steps below. Existing SPM projects must switch to CocoaPods before using this plugin.
+
+### Package installation
+
 install the package and sync the project.
 ```bash
 npm install capacitor-plugin-incoming-call
