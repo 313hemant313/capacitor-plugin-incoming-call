@@ -12,5 +12,4 @@ export class CallDetectorWeb extends WebPlugin implements CallDetectorPlugin {
     console.log('Cannot work in web', options);
     return options;
   }
-
 }
