@@ -2,6 +2,14 @@ import type { PluginListenerHandle } from '@capacitor/core';
 
 export interface CallDetectorPlugin {
   echo(options: { value: string }): Promise<{ value: string }>;
+
+    /**
+     * Returns the current call state as a Promise.
+     */
+    getCurrentCallState(): Promise<{
+        callActive: boolean;
+        callState: string;
+    }>;
   /**
    * To enable / disable detection of calls 
    * options: { action: 'ACTIVATE' | 'DEACTIVATE' }
